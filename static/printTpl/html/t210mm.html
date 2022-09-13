@@ -1,0 +1,92 @@
+<!--订单210mm打印模板-->
+<script type="text/template" id="t-order">
+
+    <div id="printer-header" class="title"
+       style="margin-bottom: -30px; height: 154px; text-align: left;padding-bottom: 0px;border-bottom: 0px solid transparent">
+        <img id="company-logo" src="" alt=""
+           style="vertical-align:middle;margin-left: 6%;max-height: 140px;max-width: 26%">
+
+        <div style="display: inline-block;width: 70%" id="page-title-parent">
+            <span id="page-title"
+                style="display: inline-block; text-align: left;font-size: 30px; text-align: left; height: 50px;"></span>
+
+        </div>
+
+    </div>
+    <p class="dashed-line" style="border-bottom:1px dashed #aaa;   "></p>
+    <p class="dashed-line" style="border-bottom:1px dashed #aaa;margin-top: 1.5px;"></p>
+
+
+    <p class="margin-tb5">
+        <span style="width: 38%;display: inline-block"><b>订单号：</b><span data-fill="orderSn">加载中...</span></span>&nbsp;
+        <span style="width: 30%;display: inline-block"><b>客户：</b><span data-fill="clientName">加载中...</span></span>
+        <span><b>客户签名：</b></span>&nbsp;
+    </p>
+
+    <p class="margin-tb5">
+        <span style="width: 38%;display: inline-block"><b>下单时间：</b><span data-fill="addTime">加载中...</span></span>&nbsp;
+        <span style="width: 38%;display: inline-block"><b>交货时间：</b><span data-fill="deliveryTime">加载中...</span></span>
+        <span><b>开单人：</b><span data-fill="clerkName">加载中...</span></span>
+    </p>
+
+
+    <p class="margin-tb5">
+        <span><b style="float: left;">收货信息：</b><span id="consignee-info" style="float: left;">加载中...</span></span>&nbsp;
+    </p>
+
+
+    <div id="table-container">
+    </div>
+
+    <p class="margin-tb5" style="margin-top: 10px!important;">
+
+        <div style="display: inline-block;width: 45%">
+           <span>
+               <b>订单总价：￥<b data-fill="realAmount"></b> </b>
+           </span> &nbsp;&nbsp;
+           <span>原价：￥
+               <s data-fill="orderAmount"></s>
+           </span>
+        </div>
+
+        <div style="display: inline-block;width: 50%">
+            <span style="display: inline-block; width: 35%;">
+              <b>已收：￥<b style="font-size: 14px;" data-fill="paidAmount"></b></b>
+            </span>
+             <span id="should-paid">
+               <b style="margin-left: 50px;">未收：￥<b style="font-size: 14px;" data-fill="unpaidAmount"></b></b>
+             </span>
+        </div>
+    </p>
+
+    <p class="margin-tb5" style="overflow: hidden" >
+          <span id="lastUnpaidBox" style="width:70%;display: none;float: left">
+             <span style="display: inline-block;width: 64.5%">
+                 <b>上次欠：￥<b data-fill="beforeClientUnpaidAmount"></b></b>
+             </span>
+             <span style="display: inline-block;">
+                 <b>累计欠：￥<b data-fill="currentClientUnpaidAmount"></b></b>
+             </span>
+         </span>
+
+          <span style="width:29%;display: none;float: left" id="paymentTypeBox">
+              <b>本次收款方式：<b id="paymentType"></b></b>
+          </span>
+    </p>
+
+    <p class="margin-tb5">
+        <span><b>备注：</b><span data-fill="description"></span></span>
+    </p>
+
+    <p class="dashed-line" style="margin-top: 2px"></p>
+
+    <div class="margin-tb5" style="margin-top: 10px!important;border-bottom: 1px dashed #aaa;padding-bottom: 10px;">
+        <div style="font-size: 15px;display: inline-block" id="printDescription"></div>
+    </div>
+
+
+    <div class="pageEnd">
+
+    </div>
+
+</script>

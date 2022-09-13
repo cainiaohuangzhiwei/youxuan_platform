@@ -1,0 +1,324 @@
+@charset "UTF-8";
+.page297mm {
+  width: 297mm; }
+
+.page210mm {
+  width: 210mm; }
+
+.page148mm {
+  width: 148mm; }
+
+.page110mm {
+  width: 110mm; }
+
+.page80mm {
+  width: 80mm; }
+
+/*打印的通用样式设置*/
+@media print {
+  /*h1 {*/
+  /*color: #000;*/
+  /*background: none;*/
+  /*}*/
+  /*nav, aside {*/
+  /*display: none;*/
+  /*}*/
+  body, article {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    margin: 0; }
+  @page {
+    margin: 0 2cm; }
+  /*page-break-after，主要用来在打印时插入一个分页符，分页就靠它了 。
+  它还有个双胞胎的兄弟，叫page-break-before，参数和它一样，
+  看名字即知道它是用来在对象之前插入分页符。*/
+  /*.table-box {page-break-after:always;}*/
+  /*通过别名控制纸张大小,如"A4"或“legal.”*/
+  /*@page {*/
+  /*size: A4;*/
+  /*}*/
+  /*@page {*/
+  /*size: 210mm 297mm;*/
+  /*}*/ }
+
+li {
+  list-style-type: none; }
+
+.pageIndex {
+  font-size: 12px; }
+
+.dashed-line {
+  border-bottom: 1px dashed #aaa;
+  margin-top: 2px; }
+
+/*S= 清除父元素的浮动*/
+.clearfloat:after {
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+  height: 0; }
+
+.clearfloat {
+  zoom: 1; }
+
+/*E= 清除父元素的浮动*/
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-size: 16px;
+  /*padding:20px;*/
+  color: black;
+  font-family: '微软雅黑'; }
+
+.title {
+  letter-spacing: 7px;
+  font-weight: bold;
+  font-size: 23px;
+  margin: 10px 0;
+  width: 100%;
+  color: #000;
+  border-bottom: 1px dashed #aaa;
+  padding-bottom: 20px; }
+
+.sub-title {
+  letter-spacing: 1px;
+  font-size: 16px;
+  color: #777;
+  line-height: 1.7;
+  font-weight: normal; }
+
+.td-title {
+  color: #000; }
+
+.content {
+  position: relative;
+  margin: 0 auto; }
+
+.qrcode {
+  position: absolute;
+  top: -15px;
+  right: 0; }
+
+.qrcode p {
+  position: relative;
+  top: 115px;
+  left: 0;
+  text-align: center; }
+
+table {
+  border-collapse: collapse;
+  width: 100%; }
+
+tfoot {
+  color: black; }
+
+th {
+  color: #000; }
+
+.td-title span {
+  float: left;
+  width: 40%; }
+
+td .goods-spec:last-child .goods-spec-td2, td .goods-spec:last-child .goods-spec-td, td .goods-spec:last-child .goods-spec-td3 {
+  border-bottom: 0; }
+
+th, td {
+  border: 1px solid #000;
+  height: 25px;
+  /*line-height:25px;*/
+  text-align: center; }
+
+.noborder-table {
+  border: none; }
+
+.noborder-table td {
+  border: none; }
+
+.left-align-table td {
+  text-align: left; }
+
+.goods {
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px dashed #aaa;
+  margin: 5px 0 10px 0;
+  padding-bottom: 10px; }
+
+.goods-spec {
+  width: 100%; }
+
+.goods-spec-td {
+  padding: 0 5px;
+  width: 13%;
+  border-style: solid;
+  border-color: #000;
+  border-width: 0 1px 1px 0;
+  vertical-align: middle; }
+
+.goods-spec-td2 {
+  width: 72%;
+  border-style: solid;
+  border-color: #000;
+  border-width: 0 0 1px 0; }
+
+.goods-spec-td3 {
+  width: 13%;
+  border-style: solid;
+  border-color: #000;
+  border-width: 0 0 1px 1px;
+  vertical-align: middle; }
+
+.spec-cell-box {
+  width: 14.2%;
+  float: left;
+  text-align: center;
+  table-layout: fixed;
+  border-bottom: 1px solid #000; }
+
+.goods-spec-td2 .spec-cell-box:nth-child(7n+0) .spec-cell td {
+  border-right: 0; }
+
+a[title="站长统计"] {
+  display: none; }
+
+/*.goods-spec-td2 .spec-cell-box:nth-last-child(6),.goods-spec-td2 .spec-cell-box:nth-last-child(5),.goods-spec-td2 .spec-cell-box:nth-last-child(4),.goods-spec-td2 .spec-cell-box:nth-last-child(3),.goods-spec-td2 .spec-cell-box:nth-last-child(2),.goods-spec-td2 .spec-cell-box:nth-last-child(1){*/
+/*border-bottom:0;*/
+/*}*/
+.print-remark {
+  margin-top: 20px;
+  padding: 10px 0; }
+
+.print-remark p {
+  line-height: 1.7; }
+
+.spec-cell td {
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  width: 100%;
+  border-style: dashed;
+  border-color: #aaa;
+  border-width: 0 1px 1px 0;
+  padding: 1px 0;
+  overflow-x: hidden;
+  height: 13px;
+  line-height: 13px; }
+
+.spec-cell b {
+  color: #000; }
+
+.no-pad {
+  text-align: left;
+  padding: 0; }
+
+.no-borderBottom td {
+  border-bottom: 0; }
+
+.pull-left {
+  float: left; }
+
+.clear {
+  clear: both; }
+
+.margin-tb5 {
+  margin: 5px 0 5px 0;
+  font-size: 16px; }
+
+.margin-tb5 span {
+  display: inline-block;
+  font-size: 16px; }
+
+.margin-tb5 b {
+  font-size: 16x; }
+
+.margin-tb5 s {
+  font-size: 16px; }
+
+.prefix-star:before {
+  content: "*";
+  color: #ff6c60; }
+
+b {
+  font-weight: bold; }
+
+.wchild-inner-center {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto; }
+
+@media print {
+  /*h1 {*/
+  /*color: #000;*/
+  /*background: none;*/
+  /*}*/
+  /*nav, aside {*/
+  /*display: none;*/
+  /*}*/
+  body, article {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    margin: 0; }
+  @page {
+    margin: 0cm 2cm; }
+  /*page-break-after，主要用来在打印时插入一个分页符，分页就靠它了 。
+  它还有个双胞胎的兄弟，叫page-break-before，参数和它一样，
+  看名字即知道它是用来在对象之前插入分页符。*/
+  /*.table-box {page-break-after:always;}*/
+  /*通过别名控制纸张大小,如"A4"或“legal.”*/
+  /*@page {*/
+  /*size: A4;*/
+  /*}*/
+  /*@page {*/
+  /*size: 210mm 297mm;*/
+  /*}*/ }
+
+/* 发货单 110mm 模板专用*/
+.goods-spec-td4 {
+  width: 100%; }
+
+.goods-spec-td4 .spec-cell-box {
+  height: 40px;
+  width: 16.7%;
+  float: left;
+  text-align: center;
+  table-layout: fixed;
+  border-bottom: 1px solid #aaa; }
+
+.goods-spec-td4 .spec-cell-box .spec-cell td {
+  text-align: center;
+  border: none; }
+
+.page80mm, .page110mm {
+  font-size: 12px; }
+  .page80mm .margin-tb5 b, .page80mm .margin-tb5 span, .page110mm .margin-tb5 b, .page110mm .margin-tb5 span {
+    font-size: 12px; }
+
+.page148mm {
+  font-size: 14px; }
+  .page148mm .margin-tb5 b, .page148mm .margin-tb5 span {
+    font-size: 14px; }
+
+.specTwoTitle {
+  border-bottom: 1px solid black; }
+
+.goods-spec-td2, .goodsTypeBox {
+  overflow: hidden; }
+  .goods-spec-td2 .specCell, .goodsTypeBox .specCell {
+    border-right: 1px solid black;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+  .goods-spec-td2 .specCell:last-child, .goodsTypeBox .specCell:last-child {
+    border-right: none; }

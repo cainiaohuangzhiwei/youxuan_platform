@@ -1,0 +1,55 @@
+<!--订单210mm打印模板-->
+<script type="text/template" id="t-order">
+	<div id="printer-header" class="title" style="margin-bottom: -30px; height: 154px; text-align: left;padding-bottom: 0px;border-bottom: 0px solid transparent">
+		<img id="company-logo" src="" alt="" style="vertical-align:middle;margin-left: 6%;max-height: 140px;max-width: 26%">
+
+		<div style="display: inline-block;width: 70%" id="page-title-parent">
+			<span id="page-title" style="display: inline-block; text-align: left;font-size: 30px; text-align: left; height: 50px;"></span>
+		</div>
+	</div>
+	<p class="dashed-line" style="border-bottom:1px dashed #aaa;   "></p>
+	<p class="dashed-line" style="border-bottom:1px dashed #aaa;margin-top: 1.5px;"></p>
+	<p class="margin-tb5">
+		<span style="width: 45%;display: inline-block"><b>采购退货单号：</b><span data-fill="groupPurchaseReturnOrderSn">加载中...</span></span>&nbsp;
+		<span style="width: 40%;display: inline-block"><b>商家：</b><span data-fill="supplierName">加载中...</span></span>
+		<span><b>时间：</b><span data-fill="addTime">加载中...</span></span>
+	</p>
+	<p class="margin-tb5">
+		<span style="width: 30%;display: inline-block"><b>仓库：</b><span data-fill="warehouseName">加载中...</span></span>
+		<span style="display: inline-block"><b>结算账户：</b><span id="organizationAccount">加载中...</span>&nbsp;&nbsp;</span>
+		<span><b>开单人：</b><span data-fill="clerkName">加载中...</span></span>
+	</p>
+	<!--<p class="margin-tb5">
+        <span><b style="float: left;">收货信息：</b><span id="consignee-info" style="float: left;">加载中...</span></span>&nbsp;
+   </p>-->
+	<div id="table-container">
+	</div>
+	<p class="margin-tb5" style="margin-top: 10px!important;">
+		<div style="display: inline-block;width: 40%">
+			<span>
+        <b>最终退货价：￥<b data-fill="realAmount"></b></b>
+      </span>&nbsp;&nbsp;
+			<!--<span>合计：￥<s data-fill="totalAmount"></s></span>-->
+		</div>
+		<div style="display: inline-block;">
+			<span>
+	      <b>其他费用：<b data-fill="otherAmountRemark"></b>￥<b style="font-size: 14px;" data-fill="otherAmount"></b></b>
+	      <b>元</b>
+      </span>
+			<span id="isPriceChanged">
+        <b style="margin-left: 20px;">抹零：-<b style="font-size: 14px;" data-fill="moLingAmount"></b></b>
+        <b>元</b>
+      </span>
+		</div>
+	</p>
+	<p class="margin-tb5">
+		<span><b>备注：</b><span data-fill="remark"></span></span>
+	</p>
+	<p class="dashed-line" style="margin-top: 2px"></p>
+	<div class="margin-tb5" style="margin-top: 10px!important;border-bottom: 1px dashed #aaa;padding-bottom: 10px;">
+		<div style="font-size: 15px;display: inline-block" id="printDescription"></div>
+	</div>
+	<div class="pageEnd">
+
+	</div>
+</script>

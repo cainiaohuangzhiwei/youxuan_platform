@@ -1,0 +1,182 @@
+/**
+ * @Description: 布局类
+ * @Author: Navi
+ * @Email: 1592193221@qq.com
+ * @Date: 2020-07-01 10:30:34
+ * @LastEditTime: 2020-09-10 17:08:08
+ * @LastEditors: lufengkai
+ */
+.wg-relative,
+.wg-rela {
+	position: relative;
+}
+
+.wg-absolute,
+.wg-abso {
+	position: absolute;
+}
+
+.wg-width {
+	width: 100%;
+}
+
+.wg-font-xs {
+	font-size: 22px;
+}
+
+.wg-font-sm {
+	font-size: 26px;
+}
+
+.wg-font-md {
+	font-size: 28px;
+}
+
+.wg-font-lg {
+	font-size: 30px;
+}
+
+.wg-font-xl {
+	font-size: 34px;
+}
+
+.wg-flex {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.wg-flex-sp {
+	display: flex;
+	justify-content: space-between;
+}
+
+.wg-flex-wrap {
+	flex-wrap: wrap;
+}
+
+.wg-flex-nowrap {
+	flex-wrap: nowrap;
+}
+
+.wg-col-center {
+	align-items: center;
+}
+
+.wg-col-top {
+	align-items: flex-start;
+}
+
+.wg-col-bottom {
+	align-items: flex-end;
+}
+
+.wg-row-center {
+	justify-content: center;
+}
+
+.wg-row-left {
+	justify-content: flex-start;
+}
+
+.wg-row-right {
+	justify-content: flex-end;
+}
+
+.wg-row-between {
+	justify-content: space-between;
+}
+
+.wg-row-around {
+	justify-content: space-around;
+}
+
+.wg-text-left {
+	text-align: left;
+}
+
+.wg-text-center {
+	text-align: center;
+}
+
+.wg-text-right {
+	text-align: right;
+}
+
+.wg-flex-col {
+	display: flex;
+	flex-direction: column;
+}
+
+.wg-left {
+  position: relative;
+}
+
+.wg-old {
+  color: #bfcbd9;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 45px;
+  min-width: 200px;
+  position: absolute;
+  top: 0;
+  display: none;
+  right: -117px;
+}
+
+.wg-left:hover .wg-old {
+  color: #bfcbd9;
+  display: block;
+}
+
+.wg-mt20 {
+	margin-top: 20px;
+}
+
+.wg-mr6 {
+  margin-left: 6px;
+}
+
+.wg-mr10 {
+	margin-right: 10px;
+}
+
+.wg-ml10 {
+	margin-left: 10px;
+}
+
+
+// 定义flex等分
+@for $i from 0 through 12 {
+	.wg-flex-#{$i} {
+		flex: $i;
+	}
+}
+
+// 定义字体(px)单位
+@for $i from 9 to 21 {
+	.wg-font-#{$i} {
+		font-size: $i + px;
+	}
+}
+
+/*滚动条的宽度*/
+::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+}
+
+/*滚动条的设置*/
+::-webkit-scrollbar-thumb {
+	background-color: rgba(199,201,204);
+	background-clip: padding-box;
+	min-height: 28px;
+	-webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+}
+
+/*滚动条移上去的背景*/
+::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(199,201,204,0.8);
+}

@@ -1,0 +1,49 @@
+{
+  "status": "SUCCESS",
+  "data": {
+    "status": [
+      {
+        "key": "",
+        "value": "全部"
+      },
+      {
+        "key": "1",
+        "value": "待发货 (未拣货)"
+      },
+      {
+        "key": "2",
+        "value": "待发货 (拣货中)"
+      },
+      {
+        "key": "3",
+        "value": "已发货 (部分商品发货)"
+      },
+      {
+        "key": "4",
+        "value": "已发货 (全部商品发货)"
+      },
+      {
+        "key": "5",
+        "value": "已确认收货"
+      }
+    ],
+    "tableData": [
+      {
+        "orderSn": "S123456",
+        "deliverStateAndSign": 3
+      },
+      {
+        "orderSn": "S56",
+        "deliverStateAndSign": 2
+      },
+      {
+        "orderSn": "S123456",
+        "deliverStateAndSign": 4
+      },
+      {
+        "orderSn": "S123456",
+        "deliverStateAndSign": 1
+      }
+    ]
+  }
+}

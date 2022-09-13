@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>打印</title>
+		<!--[if IE
+			]><script
+				src="source/js/libs/ie/html5shiv.js"
+				type="text/javascript"
+			></script
+		><![endif]-->
+		<!--[if lt IE 7
+			]><script src="source/js/libs/ie/json2.js" type="text/javascript"></script
+		><![endif]-->
+		<meta charset="utf-8" />
+		<meta name="renderer" content="webkit" />
+		<!--若页面需默认用极速核，增加标签-->
+		<link rel="stylesheet" href="source/css/common/printCommon.css" />
+		<style type="text/css">
+			*[data-fill],
+			#printDescription {
+				display: inline-block;
+				max-height: 999999px;
+			}
+
+			.page110mm .table-item:last-child {
+				border-bottom: none !important;
+			}
+		</style>
+	</head>
+
+	<body class="clearfloat">
+		<div class="content" id="j-con">
+			<!--正在生成订单，请耐心等候（温馨提示：如果你看到这句话，请重新打印吧>_<）-->
+			<div id="tips-cell" style="display: none;">
+				<!--正在生成订单，请耐心等候...-->
+			</div>
+		</div>
+		<script src="source/js/libs/jquery/jquery.js"></script>
+		<!--<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+     <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>-->
+		<script src="source/js/libs/requirejs/require.js"></script>
+		<script src="source/js/require.config.js"></script>
+		<script type="text/javascript">
+			require(['printOrder'], function (main) {
+				main.init()
+			})
+		</script>
+
+		<!--订单210mm打印模板-->
+		<!--include "./printTpl/fragment/t210mm.html"-->
+
+		<!--订单110通用打印模板-->
+		<script type="text/template" id="t-order-110mm">
+
+			<div style="text-align: center;margin-bottom: 20px;margin-top: 20px;">
+			  <img id="company-logo" src="" alt="" style="max-height: 140px;max-width: 26%">
+			</div>
+
+			<div style="width: 100%;text-align: center;padding-bottom: 10px;" id="page-title-parent">
+			  <span id="page-title" style="font-size: 18px; text-align: center"></span>
+			</div>
+
+			<!--<div  id="printer-header" class="title" style="margin-bottom: -30px; height: 154px; text-align: left;padding-bottom: 0px;border-bottom: 0px solid transparent">-->
+			<!--<img  id="company-logo" src="" alt="" style="vertical-align:middle;margin-left: 6%;max-height: 140px;max-width: 26%">-->
+			<!--<div style="display: inline-block;width: 70%" id="page-title-parent">-->
+			<!--<span id="page-title" style="display: inline-block; text-align: left;font-size: 18px; text-align: left; height: 50px;"></span>-->
+			<!--</div>-->
+			<!--</div>-->
+
+			<p class="dashed-line"></p>
+
+			<p class="margin-tb5">
+			  <span style="width: 55%;display: inline-block"><b>订单号：</b><span data-fill="orderSn">加载中...</span></span>
+			  <span><b>开单人：</b><span data-fill="clerkName">加载中...</span></span>
+			</p>
+
+			<p class="margin-tb5">
+			  <span style="width:48%; display: inline-block"><b>下单时间：</b><span data-fill="addTime">加载中...</span></span>
+			  <span style="width:48%; display: inline-block"><b>交货时间：</b><span data-fill="deliveryTime">加载中...</span></span>
+
+			</p>
+
+			<p class="margin-tb5">
+			  <span style="width: 30%;display: inline-block"><b>客户：</b><span data-fill="clientName">加载中...</span></span>
+			</p>
+
+			<p class="margin-tb5">
+			  <p><b style="vertical-align: top">收货信息：</b><span style="width: 80%" id="consignee-info"></span></p>
+			</p>
+
+			<p class="margin-tb5">
+			  <span><b>备注：</b><span data-fill="description"></span></span>
+			</p>
+
+			<p class="dashed-line" style="margin: 20px 0px;"></p>
+
+			<div id="table-container">
+			</div>
+
+			<p class="dashed-line" style="margin-top: 20px;" id="table-dashed-line"></p>
+
+			<p class="margin-tb5">
+			  <span style="width: 48%;display: inline-block"><b>总数量：<b data-fill="totalCount"></b></b></span>
+			  <span><b>总额：￥<b data-fill="realAmount"></b></b></span>
+			</p>
+
+			<p class="margin-tb5">
+			  <span style="display: inline-block;width: 48%">
+			        <b>已支付：￥<b data-fill="paidAmount"></b></b>
+			    </span>
+			  <span id="should-paid">
+			        <b>待支付：￥<b data-fill="unpaidAmount"></b></b>
+			    </span>
+			</p>
+
+			<p class="margin-tb5" id="paymentTypeBox" style="display:none;">
+			  <span style="display: inline-block;">
+			        <b>本次收款方式：<b id="paymentType"></b></b>
+			    </span>
+			</p>
+
+			<p class="dashed-line"></p>
+
+			<p class="margin-tb5 dashed-line" style="padding-bottom: 10px;display: none" id="lastUnpaidBox">
+			  <span style="display: inline-block;width: 48%">
+			        <b>上次欠：￥<b data-fill="beforeClientUnpaidAmount"></b></b>
+			    </span>
+			  <span style="display: inline-block;">
+			        <b>累计欠：￥<b data-fill="currentClientUnpaidAmount"></b></b>
+			    </span>
+			</p>
+
+			<p class="margin-tb5" style="border-bottom: 1px dashed #aaa;padding-bottom: 10px;padding-top: 5px;">
+			  <b style="font-size: 13px;" id="printDescription"></b>
+			</p>
+		</script>
+		<!--订单110mm-->
+		<script type="text/template" id="t-table-110mm-item">
+			<table style="margin-top: 0px;" class="noborder-table left-align-table table-box page110mm ">
+			  <tbody>
+			    <!--<tr>-->
+			    <!--<td class="td-title" style="font-weight: bold">货号/规格</td>-->
+			    <!--<td class="td-title" style="font-weight: bold">市场价</td>-->
+			    <!--<td class="td-title" style="font-weight: bold">单价</td>-->
+			    <!--<td class="td-title" style="font-weight: bold">数量</td>-->
+			    <!--<td class="td-title" style="font-weight: bold">总价</td>-->
+			    <!--</tr>-->
+			  </tbody>
+			</table>
+		</script>
+		<script type="text/template" id="t-table-110mm-tr">
+			<tr class="table-item">
+			  <td class="divider-line" style="border-bottom: 1px #aaa dashed">
+			    <b class="td-title goodsNumber" style="width: 38%;;margin-top: 10px;display: inline-block">款号</b>
+			    <b style="min-width: 10%;display: inline-block">数量：<span class="quantity"></span></b>
+			    <b style="display: inline-block;margin-left: 10px;">单价：￥<span class="price"></span></b>
+			    <b style="display: inline-block;margin-left: 10px;">小计：￥<span class="totalAmount"></span></b>
+			    <div class="goods-spec-td4 clearfloat" style="margin:10px 0">
+
+			    </div>
+			  </td>
+			</tr>
+		</script>
+		<!--订单80mm-->
+		<script type="text/template" id="t-table-80mm-item">
+			<table style="margin-top: 0px;" class="noborder-table left-align-table table-box page80mm ">
+			  <tbody>
+			    <tr>
+			      <td class="td-title" style="font-weight: bold">货号/规格</td>
+			      <td class="td-title" style="font-weight: bold">数量</td>
+			      <td class="td-title" style="font-weight: bold">单价</td>
+			      <td class="td-title" style="font-weight: bold">总价</td>
+			    </tr>
+			  </tbody>
+			</table>
+		</script>
+		<script type="text/template" id="t-table-80mm-tr">
+			<tr class="table-item">
+			  <td class="td-title goodsNumber" style="">款号</td>
+			  <td class="td-title quantity" style="">数量</td>
+			  <td class="td-title price" style="">单价</td>
+			  <td class="td-title totalAmount" style="">总价</td>
+			</tr>
+		</script>
+		<!--A4打印模板-->
+		<script type="text/template" id="t-table-tr">
+			<tr class="table-item">
+			  <td class="td-title index" style="">序号</td>
+			  <td class="td-title goodsNumber" style="word-wrap:break-word">款号</td>
+			  <td class="td-title specOne" style="">颜色</td>
+			  <td class="td-title goods-spec-td2" style="width:50%;">
+			    <!--<span class="specCell">SER</span>-->
+			  </td>
+			  <td class="td-title totalQuantity" style="">总数</td>
+			  <td class="td-title price" style="">单价</td>
+			  <td class="td-title totalAmount" style="">总价</td>
+			</tr>
+		</script>
+		<script type="text/template" id="t-table-item">
+			<table style="margin-top: 0px;" class="table-box">
+			  <tbody>
+			    <tr>
+			      <td class="td-title" style="font-weight: bold">序号</td>
+			      <td class="td-title" style="font-weight: bold">款号</td>
+			      <td class="td-title specOneTitle" style="font-weight: bold">颜色</td>
+			      <td class="td-title" style="width:50%;font-weight: bold">
+			        <div class="specTwoTitle">
+			        </div>
+			        <div class="goodsTypeBox">
+			          <!--<span class="specCell">L</span>-->
+			        </div>
+			      </td>
+			      <td class="td-title" style="font-weight: bold">总数</td>
+			      <td class="td-title" style="font-weight: bold">单价</td>
+			      <td class="td-title" style="font-weight: bold">总价</td>
+			    </tr>
+			  </tbody>
+			</table>
+		</script>
+		<!--商品有图模板-->
+		<script type="text/template" id="t-table-goods-img-item">
+			<table style="margin-top: 0px;" class="table-box">
+			  <tbody>
+			    <tr>
+			      <td class="td-title" style="font-weight: bold">序号</td>
+			      <td class="td-title" style="font-weight: bold;">图片</td>
+			      <td class="td-title" style="font-weight: bold">款号</td>
+			      <td class="td-title specOneTitle" style="width:10%;font-weight: bold">颜色</td>
+			      <td class="td-title" style="font-weight: bold">数量</td>
+			      <td class="td-title" style="font-weight: bold">单价</td>
+			      <td class="td-title" style="font-weight: bold">总价</td>
+			    </tr>
+			  </tbody>
+			</table>
+		</script>
+		<script type="text/template" id="t-table-goods-img-tr">
+			<tr class="table-item">
+			  <td class="td-title index" style="">序号</td>
+			  <td class="td-title" style="word-wrap:break-word;width: 80px;height: 80px">
+			    <img class="goodsImage" src="" alt="" style="width: 60px;height: 60px;margin: 10px;">
+			  </td>
+			  <td class="td-title goodsNumber" style="">款号</td>
+			  <td class="td-title goodsSpec" style=";"> 规格</td>
+			  <td class="td-title quantity" style="">数量</td>
+			  <td class="td-title price" style="">单价</td>
+			  <td class="td-title totalAmount" style="">总价</td>
+			</tr>
+		</script>
+		<!--商品无图模板-->
+		<script type="text/template" id="t-table-goods-item">
+			<table style="margin-top: 0px;" class="table-box">
+			  <tbody>
+			    <tr>
+			      <td class="td-title" style="font-weight: bold">序号</td>
+			      <td class="td-title" style="font-weight: bold">款号</td>
+			      <td class="td-title specOneTitle" style="width:10%;font-weight: bold">颜色</td>
+			      <td class="td-title" style="font-weight: bold">数量</td>
+			      <td class="td-title" style="font-weight: bold">单价</td>
+			      <td class="td-title" style="font-weight: bold">总价</td>
+			    </tr>
+			  </tbody>
+			</table>
+		</script>
+		<script type="text/template" id="t-table-goods-tr">
+			<tr class="table-item">
+			  <td class="td-title index" style="">序号</td>
+			  <td class="td-title goodsNumber" style="">款号</td>
+			  <td class="td-title goodsSpec" style=";"> 规格</td>
+			  <td class="td-title quantity" style="">数量</td>
+			  <td class="td-title price" style="">单价</td>
+			  <td class="td-title totalAmount" style="">总价</td>
+			</tr>
+		</script>
+		<!--双规格表格底部模板-->
+		<script type="text/template" id="t-table-footer-item">
+			<tfoot>
+			  <tr style="border-top: 1px solid  transparent">
+			    <td colspan="4">总计</td>
+			    <td class=table-total-quantity></td>
+			    <td></td>
+			    <td class="table-total-amount"></td>
+			  </tr>
+			</tfoot>
+		</script>
+		<!--单规格无图底部-->
+		<script type="text/template" id="t-goods-table-footer-item">
+			<tfoot>
+			  <tr style="border-top: 1px solid  transparent">
+			    <td colspan="3">总计</td>
+			    <td class="goods-table-total-quantity"></td>
+			    <td></td>
+			    <td class="goods-table-total-amount"></td>
+			  </tr>
+			</tfoot>
+		</script>
+		<!--单规格有图底部-->
+		<script type="text/template" id="t-goodsimg-table-footer-item">
+			<tfoot>
+			  <tr style="border-top: 1px solid  transparent">
+			    <td colspan="3">总计</td>
+			    <td></td>
+			    <td class="goods-table-total-quantity"></td>
+			    <td></td>
+			    <td class="goods-table-total-amount"></td>
+			  </tr>
+			</tfoot>
+		</script>
+	</body>
+</html>

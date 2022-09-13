@@ -1,0 +1,15 @@
+/**
+ * @Description: 全局样式入口
+ * @Author: Navi
+ * @Email: 1592193221@qq.com
+ * @Date: 2020-07-15 16:40:41
+ * @LastEditTime: 2020-08-13 18:53:14
+ * @LastEditors: Navi
+ */
+
+//  这里仅import
+@import './class/layout.scss', './class/behavior.scss',  './class/animation.scss','./element-ui.scss', './element-variables.scss';
+
+.sub-text {
+	color: #999;
+}

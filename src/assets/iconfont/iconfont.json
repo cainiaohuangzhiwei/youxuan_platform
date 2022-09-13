@@ -1,0 +1,65 @@
+{
+  "id": "2003261",
+  "name": "youxuan_web",
+  "font_family": "element-icons",
+  "css_prefix_text": "el-icon-",
+  "description": "云货优选_web管理系统",
+  "glyphs": [
+    {
+      "icon_id": "5925370",
+      "name": "导入",
+      "font_class": "import",
+      "unicode": "e6a6",
+      "unicode_decimal": 59046
+    },
+    {
+      "icon_id": "7217084",
+      "name": "小程序 微信",
+      "font_class": "mini-program",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "6294676",
+      "name": "邀请码",
+      "font_class": "invite-code",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "7366414",
+      "name": "财务",
+      "font_class": "new-finance",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "8702458",
+      "name": "活动",
+      "font_class": "activity",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "9807278",
+      "name": "商家 (2)",
+      "font_class": "supplier",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "1420373",
+      "name": "鲸鱼",
+      "font_class": "whale-cart",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "3978471",
+      "name": "脚本管理",
+      "font_class": "script",
+      "unicode": "e698",
+      "unicode_decimal": 59032
+    }
+  ]
+}

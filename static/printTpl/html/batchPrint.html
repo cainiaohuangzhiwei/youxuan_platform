@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>打印</title>
+    <!--[if IE]>
+      <script
+        src="source/js/libs/ie/html5shiv.js"
+        type="text/javascript"
+      ></script
+    ><![endif]-->
+    <!--[if lt IE 7]>
+      <script src="source/js/libs/ie/json2.js" type="text/javascript"></script
+    ><![endif]-->
+    <meta charset="utf-8" />
+    <meta name="renderer" content="webkit" />
+    <!--若页面需默认用极速核，增加标签-->
+    <link rel="stylesheet" href="source/css/common/printCommon.css" />
+    <style type="text/css">
+      /*加载中动画效果*/
+
+      .dotting {
+        display: inline-block;
+        min-width: 2px;
+        min-height: 2px;
+        box-shadow: 2px 0 currentColor, 6px 0 currentColor, 10px 0 currentColor;
+        -webkit-animation: dot 4s infinite step-start both;
+        animation: dot 4s infinite step-start both;
+        *zoom: expression(this.innerHTML= '...');
+        /* IE7 */
+      }
+
+      .dotting:before {
+        content: '...';
+      }
+      /* IE8 */
+
+      .dotting::before {
+        content: '';
+      }
+
+      :root .dotting {
+        margin-right: 8px;
+      }
+      /* IE9+,FF,CH,OP,SF */
+
+      @-webkit-keyframes dot {
+        25% {
+          box-shadow: none;
+        }
+        50% {
+          box-shadow: 2px 0 currentColor;
+        }
+        75% {
+          box-shadow: 2px 0 currentColor, 6px 0 currentColor;
+        }
+      }
+
+      @keyframes dot {
+        25% {
+          box-shadow: none;
+        }
+        50% {
+          box-shadow: 2px 0 currentColor;
+        }
+        75% {
+          box-shadow: 2px 0 currentColor, 6px 0 currentColor;
+        }
+      }
+    </style>
+    <style type="text/css">
+      /*打印的通用样式设置*/
+
+      @media print {
+        /*h1 {*/
+        /*color: #000;*/
+        /*background: none;*/
+        /*}*/
+        /*nav, aside {*/
+        /*display: none;*/
+        /*}*/
+        body,
+        article {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          margin: 0;
+        }
+        iframe {
+          border: 0;
+          overflow: hidden;
+        }
+        @page {
+          /*margin:0 2cm;*/
+        }
+      }
+    </style>
+  </head>
+
+  <body class="clearfloat">
+    <div class="content" id="j-con">
+      <!--正在生成订单，请耐心等候（温馨提示：如果你看到这句话，请重新打印吧>_<）-->
+      <div id="tips-cell" style="display: none;">
+        <!--正在生成订单，请耐心等候...-->
+      </div>
+    </div>
+    <div class="content" id="print-area"></div>
+    <div
+      id="loadingView"
+      style="
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0px;
+        background: repeat;
+      "
+    >
+      <p
+        style="
+          text-align: center;
+          height: 100%;
+          width: 100%;
+          background: white;
+          line-height: 500px;
+          font-size: 24px;
+        "
+      >
+        模板渲染中<span class="dotting" style="font-size: 24px;"></span>
+        &nbsp;&nbsp;
+        <span style="font-size: 16px;"
+          >（加载完成数：<span id="renderCount">0</span></span
+        >&nbsp;&nbsp;
+        <span style="font-size: 16px;"
+          >订单模板总数：<span id="totalCount"></span>）</span
+        >
+      </p>
+    </div>
+    <script src="source/js/libs/jquery/jquery.js"></script>
+    <!--<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>-->
+    <script src="source/js/libs/requirejs/require.js"></script>
+    <script src="source/js/require.config.js"></script>
+    <script type="text/javascript">
+      require(['batchPrint'], function (main) {
+        main.init()
+      })
+
+      var printFrameIdList = []
+      // 给iframe里面页面调用的方法
+      function renderFinish(options) {
+        var documentHeight = options.documentHeight
+        var printFrameId = options.printFrameId
+        var pageHeightInPx = options.pageHeightInPx
+        var pageClassName = options.pageClassName || ''
+        printFrameIdList.push(printFrameId)
+        $('#' + printFrameId)
+          .css({
+            height: documentHeight,
+          })
+          .show()
+
+        if (!$('.content').hasClass(pageClassName)) {
+          $('.content').addClass(pageClassName)
+        }
+
+        //全部页面渲染完毕的回调
+        var $printFrames = $('.printFrame')
+        $('#renderCount').html(printFrameIdList.length)
+        $('#totalCount').html($printFrames.length)
+        if ($printFrames.length == printFrameIdList.length) {
+          $('#loadingView').hide()
+          $printFrames.each(function (i) {
+            var $frame = $(this)
+            var bottomY = $frame.offset().top + $frame.height()
+            var index = Math.floor(bottomY / pageHeightInPx)
+            var remainder = (index + 1) * pageHeightInPx - bottomY
+            //拣货单特殊打印高度
+            if (window.location.href.indexOf('YX_printOrder_80') > -1) {
+              $frame.css({
+                'padding-bottom': '0px',
+              })
+            } else if (i == $printFrames.length - 1) {
+              $frame.css({
+                'padding-bottom': remainder - 50 + 'px', //防止底部因为太多空间二造成多打一页的问题
+              })
+            } else {
+              $frame.css({
+                'padding-bottom': remainder + 'px',
+              })
+            }
+            //                    $frame.after('<div class="space" style="width:100%;height: '+remainder+'px;display: inline-block"></div>');
+          })
+          // 最后一页不需要加padding，否则打印预览界面会多出一页空白页(但使用这一句的话，批量打印的单数太多的话，会造成打印卡死的现象)
+          //                $('.printFrame:last').css({
+          //                    'padding-bottom': '0',
+          //                })
+          setTimeout(function () {
+            window.print()
+          }, 500)
+        }
+      }
+    </script>
+
+    <!--iframe模板-->
+    <script type="text/template" id="t-iframe-item">
+        <iframe class="printFrame" style="width: 100%;height: 100%;display: inline-block" frameborder=no border=0>
+      </iframe>
+    </script>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+<template>
+	<div class="interestFormTable">
+		<el-row :gutter="20">
+			<basic-container
+				><el-row class="button_row" style="margin-bottom: 20px">
+					<el-button size="small" @click="editList" type="primary"
+						>修改价格区间</el-button
+					>
+				</el-row>
+				<el-row>
+					<yx-table
+						v-loading="showLoading"
+						:columns="tableColumns"
+						:selectionChange="selectionChange"
+						:pagination="page"
+						:data="tableData"
+					></yx-table>
+					<editDialog
+						:dialogVisible.sync="showEditDialog"
+						:itemInfo.sync="editItem"
+						@updateList="getList"
+					></editDialog>
+					<editFormDialog
+						:dialogVisible.sync="showEditListDialog"
+						@updateList="getList"
+					></editFormDialog>
+				</el-row>
+			</basic-container>
+		</el-row>
+	</div>
+</template>
+
+<script>
+import BasicContainer from '@wg-vue-materials/basic-container'
+import YxTable from '@wg-vue-materials/yx-table'
+import editDialog from './editDialog'
+import editFormDialog from './editFormDialog'
+import { priceList } from '@/api/grossMargins'
+export default {
+	components: {
+		BasicContainer,
+		editDialog,
+		editFormDialog,
+		YxTable,
+	},
+	name: 'FormTable',
+	watch: {
+		filterText(val) {
+			this.$refs.tree.filter(val)
+		},
+	},
+	data() {
+		return {
+			showLoading: false,
+			showEditDialog: false,
+			showEditListDialog: false,
+			tableData: [],
+			tableColumns: [
+				{
+					type: 'string',
+					dataIndex: 'lowerLimit',
+					title: '下限价格',
+					customRender: (row) => {
+						return typeof row.lowerLimit !== 'undefined'
+							? `${row.lowerLimit}元`
+							: ''
+					},
+				},
+				{
+					type: 'string',
+					dataIndex: 'upperLimit',
+					title: '上限价格',
+					customRender: (row) => {
+						return typeof row.upperLimit !== 'undefined'
+							? `${row.upperLimit}元`
+							: ''
+					},
+				},
+				{
+					type: 'string',
+					dataIndex: 'upperLimit',
+					title: '描述',
+					customRender: (row) => {
+						return `${row.lowerLimit}元≤M<${row.upperLimit}元`
+					},
+				},
+				{
+					type: 'string',
+					dataIndex: 'modulus',
+					title: '系数',
+				},
+				{
+					type: 'action',
+					title: '操作',
+					width: '150',
+					actions: [
+						{
+							title: '编辑',
+							click: (row) => {
+								this.edit(row)
+							},
+						},
+					],
+				},
+			],
+		}
+	},
+
+	created() {
+		this.initData()
+	},
+
+	methods: {
+		initData() {
+			this.getList()
+		},
+		getList: async function (flag, e) {
+			let custom = {}
+			if (e) {
+				custom = {
+					uid: e.currentTarget.__vue__._uid,
+				}
+			}
+			this.showLoading = true
+			let {
+				data: { resultCode, resultData },
+			} = await priceList({}, custom)
+			this.showLoading = false
+			if (resultCode == 0) {
+				this.tableData = resultData
+			} else {
+				this.tableData = []
+			}
+		},
+		edit: function (data) {
+			//显示编辑弹框
+			if (data && data.priceIntervalId) {
+				this.editItem = data
+			} else {
+				this.editItem = {}
+			}
+
+			this.showEditDialog = true
+		},
+		editList: function () {
+			this.showEditListDialog = true
+		},
+	},
+}
+</script>
+
+<style lang="scss" scope></style>
